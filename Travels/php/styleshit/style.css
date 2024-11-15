@@ -1,0 +1,41 @@
+body{
+    background-image:linear-gradient(100deg,skyblue,black);
+    background-position:center;
+    background-size:cover;
+
+}
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; 
+}
+
+.card {
+    width: 20rem;
+    border-width: 4px;
+    border-color: gold;
+    margin: 20px;
+}
+.cloud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    opacity: 25%;
+    background: url('../assets/Images/cloud.png');
+    background-size: cover;
+    animation: animate 200s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0px;
+        background-position-y: revert-layer;
+    }
+
+    100% {
+        background-position-x: 12000px;
+        background-position-y: center;
+    }
+}
