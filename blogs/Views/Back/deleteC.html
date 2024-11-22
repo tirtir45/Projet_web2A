@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="comment.css">
+    <title>Delete Comment</title>
+</head>
+<header>
+    <div class="logo">
+        <img src="/Views/Front/logo.png" alt="Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="/Views/Front/index.html">Forum</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Interactive map</a></li>
+            <li><a href="#">Event</a></li>
+            <li><a href="signin.html" class="sign-in">Sign in</a></li>
+            <li><a href="register.html" class="register">Register</a></li>
+        </ul>
+    </nav>
+</header>
+<br>
+<br>
+<br>
+<body>
+    <h1>Delete Comment</h1>
+    <br>
+    <br>
+    <form action="deleteC.php" method="post">
+        <label for="comment_id">Enter Comment ID to Delete:</label>
+        <input type="number" id="comment_id" name="comment_id" required>
+        <button type="submit" class="delete-button">Delete Comment</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <footer>
+        <div class="footer-links">
+            <p><a href="#" aria-label="About us">About Us</a></p>
+            <p><a href="#" aria-label="Terms of Service">Terms of Service</a></p>
+            <p><a href="#" aria-label="Privacy Policy">Privacy Policy</a></p>
+        </div>
+        <div>
+            <h4>Our Socials</h4>
+            <p><a href="https://www.facebook.com/profile.php?id=61568903216448&is_tour_dismissed" aria-label="Facebook">Facebook</a></p>
+        </div>
+        <div>
+            <h4>Our Contacts</h4>
+            <p><a href="#" aria-label="Email">Email</a></p>
+            <p>Call us on +216 999 555 222</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Forum Blog Tunisia. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
