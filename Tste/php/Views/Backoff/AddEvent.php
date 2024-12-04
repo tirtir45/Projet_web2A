@@ -71,7 +71,8 @@ if (
             text-align: center;
         }
         .form-control, .form-select, .form-check-input {
-            border-radius: 0.25rem;
+            border-radius: 0.5rem;
+
         }
         .btn {
             margin-top: 10px;
@@ -112,7 +113,7 @@ if (
                 <div class="form-group row">
                     <label for="descr" class="col-sm-11 col-form-label form-label">Description:</label>
                     <div class="col-sm-20">
-                        <textarea class="form-control" rows="3" id="descr" name="description" placeholder="Insert a description (at least 3 characters)"></textarea>
+                        <textarea class="form-control" rows="3" id="description" name="description" placeholder="Insert a description (at least 3 characters)"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
