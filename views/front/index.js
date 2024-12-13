@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("The content field cannot be empty.");
             event.preventDefault();
             return;
-        }
+        }    alert('submission successfull');
+
     });
 });

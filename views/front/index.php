@@ -1,15 +1,14 @@
 <?php
-include (__DIR__. '/../../config.php');
+require_once (__DIR__. '/../../config.php');
+
 
     if($_SERVER['REQUEST_METHOD']==='POST'){
         $title=htmlspecialchars($_POST['title']);
         $content=htmlspecialchars($_POST['content']);
-
-        echo"Blog created successfully!";
+        
         echo"<strong>Title:</strong> $title";
         echo"<strong>Content:</strong> $content";
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +17,7 @@ include (__DIR__. '/../../config.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
-
+    <link rel="stylesheet" href="style.css">
     <script src="index.js"></script>
 </head>
 <body>
@@ -27,7 +26,7 @@ include (__DIR__. '/../../config.php');
     <header>
         <nav>
             <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="manage.php">Home</a></li>
                 <li><a href="index.php">Forum</a></li>
                 <li><a href="#">Shop</a></li>
                 <li><a href="#">Interactive map</a></li>
@@ -48,7 +47,7 @@ include (__DIR__. '/../../config.php');
     <section>
     <h2>Create Blog</h2>
     <br>
-    <form action="../../controllers/process.php" method="POST">
+    <form action="../../controllers/process.php" method="post">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title">
         <br>
@@ -58,6 +57,11 @@ include (__DIR__. '/../../config.php');
         <br>
         <br>
         <button type="submit">Create Blog</button>
+        <br>
+        <br>
+        <a href="view.php">
+            <button type="button">View Blogs</button>
+        </a>
     </form>
     </section>
 
