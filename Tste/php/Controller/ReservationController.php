@@ -27,74 +27,72 @@ class ReservationController{
 			die('ErrorDel: ' . $e->getMessage());
 		}
 	}
-	function addReservation($Rs) {
-    $sql = "INSERT INTO Reservation (idClient, IdEvenement, details, dateCreation, dateReservation, statut)
-            VALUES (:idClient, :IdEvenement, :details, :dateCreation, :dateReservation, :statut)";
+function addReservation($idC,$idE,$details,$dateC,$statut) {
+    $sql = "INSERT INTO Reservation (idClient, IdEvenement, details, dateCreation, statut)
+            VALUES (:idClient, :IdEvenement, :details, :dateCreation,:statut)";
     $db = config::getConnexion();
-    try {
-        $query = $db->prepare($sql);
-        $details = $Rs->getDetails();
-        $idC = $Rs->getIdC();
-        $idE = $Rs->getIdE();
-        $dateC = $Rs->getDateC() ? $Rs->getDateC()->format('d/m/Y H:i') : null;
-        $dateR = $Rs->getDateR() ? $Rs->getDateR()->format('d-m-Y H:i:s') : null;
+    try { 
 	
-
-        $statut = $Rs->getEtat();
-
-        $query->bindParam(':idClient', $idC);
-        $query->bindParam(':IdEvenement', $idE);
-        $query->bindParam(':details', $details);
+        $query = $db->prepare($sql);
+       
+        $query->bindParam(':idClient', $idC, PDO::PARAM_INT);
+        $query->bindParam(':IdEvenement', $idE, PDO::PARAM_INT);
+        $query->bindParam(':details', $details, PDO::PARAM_STR);
         $query->bindParam(':dateCreation', $dateC);
-        $query->bindParam(':dateReservation', $dateR);
-        $query->bindParam(':statut', $statut);
+        $query->bindParam(':statut', $statut, PDO::PARAM_STR);
 
         $query->execute();
+        return true;
+
     } catch (Exception $e) {
-        echo 'Error: ' . $e->getMessage();
+        error_log("Error adding reservation: " . $e->getMessage());
+        return false; 
     }
 }
 
 
-	function showReservation($id)
-  {
-      $sql = "SELECT * FROM Reservation where IdDemande = $id";
-      $db = config::getConnexion();
-      try {
-          $query = $db->prepare($sql);
-          $query->execute();
+function showReservation($id)
+{
+    $sql = "SELECT * FROM Reservation WHERE IdDemande = :id";
+    $db = config::getConnexion();
+    try {
+        $query = $db->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->execute();
 
-          $Rs = $query->fetch();
-          return $Rs;
-      } catch (Exception $e) {
-          die('ErrorShw: ' . $e->getMessage());
-      }
-  }
-  function updateReservation($Rs, $id)
+        $Rs = $query->fetch(PDO::FETCH_ASSOC); 
+        return $Rs;
+    } catch (Exception $e) {
+        error_log('ErrorShw: ' . $e->getMessage()); 
+        return false; 
+    }
+}
+  function updateReservation($id,$idC,$idE,$details,$dateC,$dateR,$statut)
   {
-	  $sql = "UPDATE Reservation 
-            SET  idClient = :idClient, idEvenement = :idEvenement, details = :details, dateCreation = :dateCreation, dateReservation = :dateReservation, statut = :statut 
+      if (empty($dateR)) {
+    $sql = "UPDATE Reservation 
+            SET idClient = :idClient, IdEvenement = :idEvenement, details = :details, dateCreation = :dateCreation, statut = :statut 
             WHERE IdDemande = :id";
+}else{
+	  $sql = "UPDATE Reservation 
+            SET  idClient = :idClient, IdEvenement = :idEvenement, details = :details, dateCreation = :dateCreation, dateReservation = :dateReservation, statut = :statut 
+            WHERE IdDemande = :id";
+}   
 	  $db=config::getConnexion();
 	  try{
-		  $query=$db->prepare($sql);
-
-		  $details=$Rs->getDetails();
-		  $dateC=$Rs->getDateC()->format('d-m-Y  H:i:s');
-		  $dateR=$Rs->getDateR()->format('d-m-Y  H::i::s');
-		  $state=$Rs->getEtat();
-
-		  $query->bindParam(':details', $details);
-		  $query->bindParam(':dateCreation', $dateC);
-		  $query->bindParam(':dateReservation', $dateR);
-		  $query->bindParam(':statut', $state);
-		  $query->bindParam(':id', $id);
-
-		  
-		  $query->execute();
-
-	  } catch(Exception $e){
-		  echo 'ErrorUpdt: ' . $e->getMessage();
+		$query = $db->prepare($sql);
+		$query->bindParam(':idClient', $idC, PDO::PARAM_INT);
+        $query->bindParam(':IdEvenement', $idE, PDO::PARAM_INT);
+        $query->bindParam(':details', $details, PDO::PARAM_STR);
+        $query->bindParam(':dateCreation', $dateC);
+        $query->bindParam(':dateReservation',$dateR);
+        $query->bindParam(':statut', $statut, PDO::PARAM_STR);
+        $query->bindParam(':id',$id);
+        $query->execute();
+        return true;
+      }catch(Exception $e){
+                  error_log("Error updating reservation: " . $e->getMessage());
+		  return false;
 	  }
   }
 }

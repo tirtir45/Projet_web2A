@@ -55,8 +55,40 @@ document.addEventListener('DOMContentLoaded', (e) => {
     
 })
        
-           
+function sortReservations(field, direction) {
+    const container = document.getElementById('reservationList');
+    const cards = Array.from(container.getElementsByClassName('card'));
 
+    cards.sort((a, b) => {
+        let fieldA = a.dataset[field].toLowerCase();
+        let fieldB = b.dataset[field].toLowerCase();
+
+        if (field === 'dateCreation') {
+            fieldA = new Date(fieldA);
+            fieldB = new Date(fieldB);
+        }
+
+        if (fieldA < fieldB) {
+            return direction === 'asc' ? -1 : 1;
+        }
+        if (fieldA > fieldB) {
+            return direction === 'asc' ? 1 : -1;
+        }
+        return 0;
+    });
+
+    container.innerHTML = '';
+    cards.forEach(card => container.appendChild(card));
+}   
+function searchReservations() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('#reservationList .card');
+
+    cards.forEach(card => {
+        const title = card.dataset.eventTitle.toLowerCase();
+        card.style.display = title.includes(input) ? '' : 'none';
+    });
+}
 
 function Alert() {
     alert("Authentication is not working yet!");
