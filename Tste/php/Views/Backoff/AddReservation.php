@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#"><img src="/../../Assets/Images/black-logo.png" width="160" height="50" class="d-inline-block align-top" alt=""></a>
         <div class="navbar-nav">
-            <a class="nav-item nav-link-active btn btn-outline-primary" href="../FrontOFf/Home.php">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link-active btn btn-outline-primary" href="../FrontOFf/Reservations.php">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link-active btn btn-outline-warning" href="listReservation.php" style="color: yellow; outline-color: yellow;">View</a>
         </div>
     </nav>

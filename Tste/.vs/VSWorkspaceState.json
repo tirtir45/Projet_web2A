@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\php",
+    "\\php\\Controller",
+    "\\php\\jscript",
+    "\\php\\Models",
+    "\\php\\Views",
+    "\\php\\Views\\Backoff",
+    "\\php\\Views\\Frontoff"
+  ],
+  "SelectedNode": "\\php\\Views\\Backoff\\AddReservation.php",
+  "PreviewInSolutionExplorer": false
+}

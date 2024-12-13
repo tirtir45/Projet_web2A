@@ -37,5 +37,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
     });
 
-    toggleDateReservation();
+    
+    function toggleDateReservation() {
+        const status = document.getElementById('statut').value;
+        const dateDiv = document.getElementById('dateReservationRow');
+        if (status === 'Accepted') {
+            dateDiv.style.display = 'block';
+        } else {
+            dateDiv.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        toggleDateReservation();
+    });
+
 });

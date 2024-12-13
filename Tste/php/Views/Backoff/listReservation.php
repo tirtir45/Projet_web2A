@@ -32,7 +32,7 @@ $list = $ResC->listReservation();
 
         h1 {
             color: gold;
-            text-shadow: 2px 2px 4px red;
+            text-shadow: 2px 2px 4px green;
             font-size: 3.5rem;
             text-align: center;
             margin: 2rem 0;
@@ -66,7 +66,7 @@ $list = $ResC->listReservation();
         }
 
         .table th {
-            background-color: red;
+            background-color: forestgreen;
             color: white;
             text-align: center;
         }
@@ -122,7 +122,7 @@ $list = $ResC->listReservation();
                 <img src="/../../Assets/Images/black-logo.png" width="160" height="50" alt="Logo">
             </a>
             <div class="ml-auto navbar-nav">
-                <a class="nav-item nav-link btn btn-outline-primary" href="../FrontOff/Home.php">Home</a>
+                <a class="nav-item nav-link btn btn-outline-primary" href="../FrontOff/Reservations.php">View</a>
                 <a class="nav-item nav-link btn btn-outline-secondary" href="#" onclick="Alert()">Register</a>
                 <a class="nav-item nav-link btn btn-outline-warning" href="#" onclick="Alert()">Login</a>
                 <a class="nav-item nav-link btn btn-outline-success" href="AddReservation.php">Add Reservation</a>
@@ -182,7 +182,18 @@ $list = $ResC->listReservation();
         </div>
     </div>
 </main>
-<script src="../../jscript/script.js"></script>
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "3zu3KHQ-B_FDt6Km__eg1",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="3zu3KHQ-B_FDt6Km__eg1"
+domain="www.chatbase.co"
+defer>
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

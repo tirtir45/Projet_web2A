@@ -7,34 +7,36 @@ $listE=$Ec->listEvent();
 $Uc=new UserController();
 $listU=$Uc->listUsers();
 $ResC = new ReservationController();
-if($_SERVER['REQUEST_METHOD']==='POST'){
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+
 
 if (
     isset($_POST["idClient"]) && isset($_POST["IdEvenement"]) && isset($_POST["details"]) && isset($_POST["dateCreation"]) && isset($_POST["dateReservation"]) && isset($_POST["statut"])
 ) {
     if (
-        !empty($_POST["idClient"]) && !empty($_POST["IdEvenement"]) && !empty($_POST["details"]) && !empty($_POST["dateCreation"]) && !empty($_POST["dateReservation"]) && !empty(["statut"])
+        !empty($_POST["idClient"]) && !empty($_POST["IdEvenement"]) && !empty($_POST["details"]) && !empty($_POST["dateCreation"]) && !empty(["statut"])
     ) {
-
-        $Rs = new ReservationController(
-            null,
-            $_POST['idClient'],
-            $_POST['IdEvenement'],
-            $_POST['details'],
-            new DateTime($_POST['dateCreation']),
-            new DateTime($_POST['dateReservation']),
-            $_POST['statut']
-        );
-        $ResC->updateReservation($Rs, $_POST["id"]);
+                $dateC=new DateTime($_POST['dateCreation']);
+                $dateC=$dateC->format('Y-m-d H:i:s');                
+                $dateR = null;
+                if (!empty($_POST['dateReservation'])) {
+                    $dateR = new DateTime($_POST['dateReservation']);
+                    $dateR = $dateR->format('Y-m-d H:i:s');
+                }
+                $Rs = ResC->updateReservation(
+                    $_POST['IdDemande'],
+                    $_POST['idClient'],
+                    $_POST['IdEvenement'],
+                    $_POST['details'],
+                    $dateC,
+                    $dateR,
+                    $_POST['statut']  
+                );
+        
         header('Location:listReservation.php');
         exit(); 
     } else {
         $error = "Missing Informations!";
     }
-}
 }
 ?>
 <!DOCTYPE html>
@@ -78,7 +80,7 @@ if (
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#"> <img src="/../../Assets/Images/black-logo.png" width="160" height="50" class="d-inline-block align-top" alt=""></a>
         <div class="navbar-nav">
-            <a class="nav-item nav-link-active btn btn-outline-primary" href="../FrontOff/Home.php">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link-active btn btn-outline-primary" href="../FrontOff/Reservations.php">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link-active btn btn-outline-warning" href="listReservation.php">View</a>
         </div>
     </nav>
@@ -91,52 +93,52 @@ if (
             if (isset($_POST['id'])) {
                 $Rs = $ResC->showReservation($_POST["id"]);
             ?>
-            <form id="FormResAdd" action="" method="POST" enctype="multipart/form-data">
-                <input type="hidden" id="id" name="id" value="<?php echo htmlspecialchars($Rs["IdDemande"]); ?>">
+            <form id="FormResAdd" action="" method="POST">
+                <input type="hidden" id="id" name="id" value="<?php echo $Rs["IdDemande"]; ?>">
                 <div class="form-group row">
                     <label for="idClient" class="col-sm-11 col-form-label form-label">Client ID:</label>
                     <div class="col-sm-20">
-                        <input class="form-control" type="text" id="idClient" name="idClient" value="<?php echo htmlspecialchars($Rs['idClient']); ?>" disabled>
+                        <input class="form-control" type="text" id="idClient" name="idClient" value="<?php echo $Rs['idClient']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="IdEvenement" class="col-sm-11 col-form-label form-label">Event ID:</label>
                     <div class="col-sm-20">
-                        <input class="form-control" type="text" id="IdEvenement" name="IdEvenement" value="<?php echo htmlspecialchars($Rs['IdEvenement']); ?>" disabled>
+                        <input class="form-control" type="text" id="IdEvenement" name="IdEvenement" value="<?php echo $Rs['IdEvenement']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="details" class="col-sm-11 col-form-label form-label">Details:</label>
                     <div class="col-sm-20">
-                        <textarea class="form-control" rows="3" id="details" name="details"><?php echo htmlspecialchars($Rs['details']); ?></textarea>
+                        <textarea class="form-control" rows="3" id="details" name="details"><?php echo ($Rs['details']); ?></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="dateCreation" class="col-sm-11 col-form-label form-label">Date de Creation:</label>
                     <div class="col-sm-20">
-                        <input class="form-control" type="text" id="dateCreation" name="dateCreation" value="<?php echo htmlspecialchars($Rs['dateCreation']); ?>">
+                        <input class="form-control" type="datetime-local" id="dateCreation" name="dateCreation" value="<?php echo $Rs['dateCreation']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="statut" class="col-sm-11 col-form-label text-center">State:</label>
                     <div class="col-sm-10">
-                        <select class="form-select" id="statut" name="statut">
-                            <option selected><?php echo htmlspecialchars($Rs['statut']); ?></option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Accepted">Accepted</option>
-                            <option value="Rejected">Rejected</option>
+                        <select class="form-select" id="statut" name="statut" onchange="toggleDateReservation()">
+                            <option selected><?php echo ($Rs['statut']); ?></option>
+                            <option value="In Progress" <?php echo ($Rs['statut'] == 'In Progress') ? 'selected' : ''; ?>>In Progress</option>
+                            <option value="Accepted" <?php echo ($Rs['statut'] == 'Accepted') ? 'selected' : ''; ?>>Accepted</option>
+                            <option value="Rejected" <?php echo ($Rs['statut'] == 'Rejected') ? 'selected' : ''; ?>>Rejected</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group row hidden" id="dateReservationRow" style="display: <?php echo ($Rs['statut'] == 'Accepted') ? 'block' : 'none'; ?>">
+                <div class="form-group row" id="dateReservationRow" style="display:none;">
                     <label for="dateReservation" class="col-sm-11 col-form-label form-label">Date de Reservation:</label>
                     <div class="col-sm-20">
-                        <input class="form-control" type="text" id="dateReservation" name="dateReservation" value="<?php echo htmlspecialchars($Rs['dateReservation']); ?>">
+                        <input class="form-control" type="datetime-local" id="dateReservation" name="dateReservation" value="<?php echo $Rs['dateReservation']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-7 offset-sm-2">
-                        <div id="Err" name="Erreur" style="color: red;"><?php echo htmlspecialchars($error); ?></div>
+                        <div id="Err" name="Erreur" style="color: red;"><?php echo $error; ?></div>
                         <button type="submit" class="btn btn-outline-primary">Update</button>
                     </div>
                 </div>
@@ -145,5 +147,18 @@ if (
         </div>
     </div>
 </div>
+<script src="/../../jscript/Reservation.js"></script>
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "3zu3KHQ-B_FDt6Km__eg1",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="3zu3KHQ-B_FDt6Km__eg1"
+domain="www.chatbase.co"
+defer>
+</script>
 </body>
 </html>

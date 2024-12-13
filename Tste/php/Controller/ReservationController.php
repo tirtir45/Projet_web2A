@@ -69,7 +69,7 @@ function showReservation($id)
 }
   function updateReservation($id,$idC,$idE,$details,$dateC,$dateR,$statut)
   {
-      if (empty($dateR)) {
+      if (!$dateR) {
     $sql = "UPDATE Reservation 
             SET idClient = :idClient, IdEvenement = :idEvenement, details = :details, dateCreation = :dateCreation, statut = :statut 
             WHERE IdDemande = :id";
