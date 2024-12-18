@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../connect.php');
 require_once(__DIR__ . '/../Models/Event.php');
+require_once(__DIR__ . '/../Controller/UserController.php');
 
 class EventController {
 	public function listEvent(){
@@ -30,7 +31,7 @@ class EventController {
 		$req->bindValue(':id', $id);
 		try{
 			$req->execute();
-		}catch(Execption $e){
+		}catch(Exception $e){
 			die('Error: ' . $e->getMessage());
 		}
 

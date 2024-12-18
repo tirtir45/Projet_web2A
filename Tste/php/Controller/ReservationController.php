@@ -67,33 +67,45 @@ function showReservation($id)
         return false; 
     }
 }
-  function updateReservation($id,$idC,$idE,$details,$dateC,$dateR,$statut)
-  {
-      if (!$dateR) {
-    $sql = "UPDATE Reservation 
-            SET idClient = :idClient, IdEvenement = :idEvenement, details = :details, dateCreation = :dateCreation, statut = :statut 
-            WHERE IdDemande = :id";
-}else{
-	  $sql = "UPDATE Reservation 
-            SET  idClient = :idClient, IdEvenement = :idEvenement, details = :details, dateCreation = :dateCreation, dateReservation = :dateReservation, statut = :statut 
-            WHERE IdDemande = :id";
-}   
-	  $db=config::getConnexion();
-	  try{
-		$query = $db->prepare($sql);
-		$query->bindParam(':idClient', $idC, PDO::PARAM_INT);
-        $query->bindParam(':IdEvenement', $idE, PDO::PARAM_INT);
-        $query->bindParam(':details', $details, PDO::PARAM_STR);
-        $query->bindParam(':dateCreation', $dateC);
-        $query->bindParam(':dateReservation',$dateR);
-        $query->bindParam(':statut', $statut, PDO::PARAM_STR);
-        $query->bindParam(':id',$id);
-        $query->execute();
-        return true;
-      }catch(Exception $e){
-                  error_log("Error updating reservation: " . $e->getMessage());
-		  return false;
-	  }
-  }
+            function updateReservation($Res, $id)
+            {
+                $sql = "UPDATE Reservation 
+                        SET details = :details, dateCreation = :dateCreation, statut = :statut ,dateReservation= :dateReservation
+                        WHERE IdDemande = :id";
+                
+                $db = config::getConnexion();
+                
+                try {
+                    $query = $db->prepare($sql);
+
+                    $details = $Res->getDetails();
+                    $dateCreation = $Res->getDateC()->format('Y-m-d H:i:s');
+                    $statut = $Res->getEtat();
+                    $dateR = $Res->getDateR()->format('Y-m-d H:i:s');
+
+                    $query->bindParam(':details', $details);
+                    $query->bindParam(':dateCreation', $dateCreation);
+                    $query->bindParam(':statut', $statut);
+                    $query->bindParam(':dateReservation', $dateR);
+
+                    $query->bindParam(':id', $id);
+
+                    // Execute the query
+                    if ($query->execute()) {
+                        $rowsAffected = $query->rowCount();
+                        if ($rowsAffected > 0) {
+                            return true;
+                        }
+                        return false; // No rows updated
+                    } else {
+                        echo "Erreur SQL: " . implode(" ", $query->errorInfo());
+                        return false;
+                    }
+                } catch (Exception $e) {
+                    error_log('Error: ' . $e->getMessage());
+                    echo 'Error: ' . $e->getMessage();
+                    return false;
+                }
+            }
 }
 ?>

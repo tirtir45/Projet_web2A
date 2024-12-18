@@ -150,23 +150,27 @@ public function getUserById($id)
 
     public function login($email, $password)
     {
-        // Rechercher l'utilisateur par son email
-        $sql = "SELECT * FROM user WHERE email = :email";
         $db = config::getConnexion();
+        $sql = "SELECT * FROM user WHERE email = :email";
         $query = $db->prepare($sql);
         $query->execute(['email' => $email]);
         $user = $query->fetch();
     
         if ($user) {
+            if ($user['is_blocked'] == 1) {
+                return "This account is blocked.";
+            }
+    
             if ($password == $user['password']) {
                 return $user; 
             } else {
-                return "Invalid password!";  
+                return "Invalid password!";
             }
         } else {
-            return "User not found!";  
+            return "User not found!";
         }
     }
+    
    // Mettre à jour le profil de l'utilisateur
 public function updateProfile($user_id, $firstname, $lastname, $email, $role, $password = null)
 {
@@ -227,6 +231,71 @@ public function desactiviercompte($user_id)
     } catch (Exception $e) {
         return "Error: " . $e->getMessage();
     }
+}
+
+public function blockUserById($id)
+{
+    $db = config::getConnexion();
+    $sql = "UPDATE user SET is_blocked = 1 WHERE id = :id";
+
+    try {
+        $query = $db->prepare($sql);
+        $query->execute(['id' => $id]);
+
+        if ($query->rowCount() > 0) {
+            return "User successfully blocked.";
+        } else {
+            return "User not found or already blocked.";
+        }
+    } catch (Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+public function unblockUserById($user_id)
+{
+    $db = config::getConnexion();
+    $sql = "UPDATE user SET is_blocked = 0 WHERE id = :id_user";
+
+    try {
+        $query = $db->prepare($sql);
+        $query->execute(['id_user' => $user_id]);
+
+        if ($query->rowCount() > 0) {
+            return "Utilisateur débloqué avec succès.";
+        } else {
+            return "Utilisateur introuvable ou déjà débloqué.";
+        }
+    } catch (Exception $e) {
+        return "Erreur : " . $e->getMessage();
+    }
+}
+public function deactivateAccountById($user_id)
+{
+    $db = config::getConnexion();
+    $sql = "UPDATE user SET deactivation_date = NOW() WHERE id = :id_user";
+
+    try {
+        $query = $db->prepare($sql);
+        $query->execute(['id_user' => $user_id]);
+
+        if ($query->rowCount() > 0) {
+            return "Votre compte a été désactivé avec succès pour 30 jours.";
+        } else {
+            return "Impossible de désactiver le compte. Veuillez réessayer.";
+        }
+    } catch (Exception $e) {
+        return "Erreur : " . $e->getMessage();
+    }
+}
+public function validatePassword($id_user, $password) {
+    // Connexion à la base de données
+    $db = config::getConnexion();
+    $query = $db->prepare('SELECT password FROM user WHERE id_user = :id_user');
+    $query->execute(['id_user' => $id_user]);
+    $storedPassword = $query->fetchColumn();
+
+    // Comparer les mots de passe (en texte clair, à sécuriser avec un hachage)
+    return $storedPassword === $password;
 }
 
 }

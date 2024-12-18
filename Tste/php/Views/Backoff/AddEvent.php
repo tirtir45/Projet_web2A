@@ -1,4 +1,9 @@
 <?php
+/*session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../usrview/login.php");
+    exit();
+}*/
 require_once(__DIR__ . '/../../Controller/EventController.php');
 $error = "";
 $Ev = null;

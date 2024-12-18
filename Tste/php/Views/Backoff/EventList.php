@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../usrview/login.php");
+    exit();
+}
 require_once(__DIR__ . '/../../Controller/EventController.php');
 $eventC = new EventController();
 $list = $eventC->listEvent();
@@ -10,19 +15,6 @@ $list = $eventC->listEvent();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event List</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link rel="stylesheet" href="../../css/main.css">
-    <link rel="stylesheet" href="../../css/mian.css">
-    <link rel="stylesheet" href="../../css/spacing.css">
-    <link rel="stylesheet" href="../../css/swiper.min.css">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/meanmenu.min.css">
-    <link rel="stylesheet" href="../../css/pharmecy.css">
-    <link rel="stylesheet" href="../../css/pharmecy.css">
-    <link rel="stylesheet" href="../../css/slick.css">
-    <link rel="stylesheet" href="../../css/magnific-popup.css">
-    <link rel="stylesheet" href="../../css/grocery.css">
-    <link rel="stylesheet" href="../../css/fontawesome-pro.css">
-    <link rel="stylesheet" href="../../css/animate.css">
     <style>
         /* General styles */
         body {
@@ -31,8 +23,8 @@ $list = $eventC->listEvent();
         }
 
         h1 {
-            color: gold;
-            text-shadow: 2px 2px 4px red;
+            color: red;
+            text-shadow: 2px 2px 4px gold;
             font-size: 3.5rem;
             text-align: center;
             margin: 2rem 0;
@@ -53,7 +45,7 @@ $list = $eventC->listEvent();
         }
 
         .navbar-nav .nav-item .btn:hover {
-            background-color: #e63946;
+            background-color: red;
             color: white;
         }
 
@@ -77,7 +69,7 @@ $list = $eventC->listEvent();
         }
 
         .table img {
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
@@ -109,7 +101,7 @@ $list = $eventC->listEvent();
             }
 
             .table img {
-                width: 100%;
+                width: 500%;
                 height: auto;
             }
         }
@@ -156,7 +148,7 @@ $list = $eventC->listEvent();
                             <td><?= $Ev['IdEvent']; ?></td>
                             <td><?= $Ev['title']; ?></td>
                             <td>
-                                <img src="<?php echo htmlspecialchars($Ev['Pic']); ?>" width="200" height="150" class="card-img-top" alt="Pic">
+                                <img src="<?php echo htmlspecialchars($Ev['Pic']); ?>" width="250" height="100" class="card-img-top" alt="Pic">
                             </td>
                             <td><?= htmlspecialchars($Ev['description']); ?></td>
                             <td><?= $Ev['disponibility'] == 1 ? 'Yes' : 'No'; ?></td>

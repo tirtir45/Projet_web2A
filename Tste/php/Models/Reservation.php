@@ -59,7 +59,7 @@ class Reservation{
         $this->_details = $details;
     }
     public function setEtat(?string $etat): void {
-        $this->_category = $etat;
+        $this->_etat = $etat;
     }
 }
     
