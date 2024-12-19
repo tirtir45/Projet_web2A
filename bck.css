@@ -1,0 +1,38 @@
+/* Styles pour le back-office des réclamations */
+.reclamation-list {
+    padding: 20px;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reclamation-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reclamation-list th, .reclamation-list td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.reclamation-list th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.reclamation-list td {
+    background-color: #f9f9f9;
+}
+
+.reclamation-list td a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.reclamation-list td a:hover {
+    text-decoration: underline;
+}
