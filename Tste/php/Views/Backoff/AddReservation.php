@@ -1,9 +1,9 @@
 <?php
-/*session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../usrview/login.php");
-    exit();
-}*/
+session_start();
+//if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+//    header("Location: ../usrview/login.php");
+//    exit();
+//}
 ob_start();
 require_once(__DIR__ . '/../../Controller/ReservationController.php');
 echo '<pre>';

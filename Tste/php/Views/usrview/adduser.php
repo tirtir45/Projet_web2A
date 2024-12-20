@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $role = $_POST['role'];
 
     // Inclure le contrôleur et la classe User
-    include '../Controller/UserController.php';
+    include '../../Controller/UserController.php';
     
     // Créer un objet User
     $user = new User(null,$firstname, $lastname, $gender, $email, $password, $role);

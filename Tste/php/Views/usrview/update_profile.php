@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Inclure le contrôleur UserController pour gérer les opérations
-include '../Controller/UserController.php';
+include '../../Controller/UserController.php';
 $userController = new UserController();
 
 // Récupérer les informations actuelles de l'utilisateur depuis la base de données

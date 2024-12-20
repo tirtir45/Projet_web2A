@@ -15,7 +15,7 @@ if (
     if (
         !empty($_POST["title"]) && !empty($_POST["category"]) && !empty($_POST["description"]) && !empty($_POST["price"]) && !empty($_FILES["Pic"]["tmp_name"])
     ) {
-        // Lire les données du fichier image
+        // Lire les donnï¿½es du fichier image
         $imageData = file_get_contents($_FILES["Pic"]["tmp_name"]);
 
         $Ev = new Event(

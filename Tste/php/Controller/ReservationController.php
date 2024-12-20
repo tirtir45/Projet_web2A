@@ -23,7 +23,7 @@ class ReservationController{
 		$req->bindValue(':id', $id);
 		try{
 			$req->execute();
-		}catch(Execption $e){
+		}catch(Exception $e){
 			die('ErrorDel: ' . $e->getMessage());
 		}
 	}

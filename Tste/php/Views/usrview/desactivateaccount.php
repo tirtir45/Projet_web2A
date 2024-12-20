@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../Controller/UserController.php';
+include '../../Controller/UserController.php';
 
 // Vérifiez si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {

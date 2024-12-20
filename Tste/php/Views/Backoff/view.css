@@ -1,0 +1,262 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Container for the comments section */
+.comments-container {
+    margin-top: 20px;
+}
+
+/* Header for each comment */
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.comment-date {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Styling for the comment content */
+.comment-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Comment list styling */
+.comment-list {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.comment-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the "No comments" message */
+.no-comments {
+    font-style: italic;
+    color: #666;
+}
+
+/* Styling for the comment form */
+.comment-form {
+    margin-top: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.submit-comment-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.submit-comment-button:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the login prompt */
+.login-prompt {
+    font-size: 1rem;
+    color: #333;
+}
+
+.login-prompt a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+
+.blog-list {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    padding: 10px;
+    width: 70%;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.search-button {
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.blog-items {
+    margin-top: 20px;
+}
+
+.blog-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-item h2 {
+    margin-top: 0;
+}
+
+.blog-reactions {
+    margin-top: 10px;
+}
+
+.reaction-form {
+    margin-top: 10px;
+}
+
+.reaction-button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.like-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.dislike-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.comment-list {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.comment-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.comment-form {
+    margin-top: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    height: 100px;
+}
+
+.comment-button {
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .footer-links,
+footer .footer-socials,
+footer .footer-contacts {
+    margin-bottom: 20px;
+}
+
+footer .footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+}

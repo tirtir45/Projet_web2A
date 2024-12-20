@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 require_once(__DIR__ . '/../../Controller/UserController.php');
 
@@ -28,15 +29,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Redirection en fonction du rôle
             if ($_SESSION['role'] == 'admin') {
                 // Si l'utilisateur est admin, rediriger vers la page d'administration
-                header("Location: listuser.php"); 
+                ob_end_clean();
+                header("Location: listuser.php");
             } else {
                 // Sinon, rediriger vers le profil de l'utilisateur
-                header("Location: profile.php");
+                ob_end_clean();
+                header("Location: ../Frontoff/index.php");
             }
             exit();
         } else {
             // Message d'erreur
-            $error = $user;  // Afficher le message retourné par la méthode login()
+            $error = $user;
+            ob_end_flush();
+            // Afficher le message retourné par la méthode login()
         }
     }
 }
@@ -50,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Addina - Multipurpose eCommerce HTML Template</title>
+        <title>Login</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -140,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="header-left">
                                 <div class="header-logo">
                                     <a href="index.html">
-                                        <img src="assets/imgs/furniture/logo/logo.svg" alt="logo not found">
+                                        <img src="../../Assets/imgs/furniture/logo/black_logo.png" alt="logo not found">
                                     </a>
                                 </div>
                                 <div class="mean__menu-wrapper furniture__menu d-none d-lg-block">
@@ -332,7 +337,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="footer-grid-3">
                             <div class="footer-widget-4">
                                 <div class="footer-logo mb-35">
-                                    <a href="index.html"><img src="assets/imgs/furniture/logo/logo-light.svg" alt="image bnot found"></a>
+                                    <a href="index.php"><img src="../../assets/imgs/furniture/logo/new.png" alt="image bnot found"></a>
                                 </div>
                                 <p>It helps designers plan out where the content will sit, the content to be written and approved.
                                 </p>
@@ -405,7 +410,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="footer-copyright-area b-t">
                     <div class="footer-copyright-wrapper">
                         <div class="footer-copyright-text">
-                            <p class="mb-0">© All Copyright 2024 by <a target="_blank" class="furniture-clr-hover" href="#">Addina</a></p>
+                            <p class="mb-0">© All Copyright 2024 by <a target="_blank" class="furniture-clr-hover" href="#">Khomsa w Khmis</a></p>
                         </div>
                         <div class="footer-payment d-flex align-items-center gap-2">
                             <div class="footer-payment-item mb-0">
@@ -437,18 +442,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Footer area end -->
         <!-- JS here -->
        
-        <script src="assets/js/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/meanmenu.min.js"></script>
-        <script src="assets/js/swiper.min.js"></script>
-        <script src="assets/js/slick.min.js"></script>
-        <script src="assets/js/magnific-popup.min.js"></script>
-        <script src="assets/js/counterup.js"></script>
-        <script src="assets/js/wow.js"></script>
-        <script src="assets/js/ajax-form.js"></script>
-        <script src="assets/js/beforeafter.jquery-1.0.0.min.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script src="../../assets/js/jquery-3.6.0.min.js"></script>
+        <script src="../../assets/js/waypoints.min.js"></script>
+        <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../../assets/js/meanmenu.min.js"></script>
+        <script src="../../assets/js/swiper.min.js"></script>
+        <script src="../../assets/js/slick.min.js"></script>
+        <script src="../../assets/js/magnific-popup.min.js"></script>
+        <script src="../../assets/js/counterup.js"></script>
+        <script src="../../assets/js/wow.js"></script>
+        <script src="../../assets/js/ajax-form.js"></script>
+        <script src="../../assets/js/beforeafter.jquery-1.0.0.min.js"></script>
+        <script src="../../assets/js/main.js"></script>
     </body>
 
     </html>

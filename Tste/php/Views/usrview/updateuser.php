@@ -19,7 +19,7 @@ if (!isset($_GET['id'])) {
 $user_id = $_GET['id'];
 
 // Inclure le contrôleur UserController et la classe User
-include '../Controller/UserController.php';
+include '../../Controller/UserController.php';
 $userController = new UserController();
 
 // Récupérer l'utilisateur par ID

@@ -16,7 +16,7 @@ if (!isset($_GET['id'])) {
 $user_id = $_GET['id'];
 
 // Inclure le contrôleur UserController
-include '../Controller/UserController.php';
+include '../../Controller/UserController.php';
 
 $userController = new UserController();
 

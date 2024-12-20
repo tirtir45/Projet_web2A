@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Inclure le contrôleur UserController pour gérer la suppression
-include '../Controller/UserController.php';
+include '../../Controller/UserController.php';
 $userController = new UserController();
 
 // Appeler la méthode pour supprimer l'utilisateur par ID

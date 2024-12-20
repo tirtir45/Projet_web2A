@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../Controller/UserController.php';
+include '../../Controller/UserController.php';
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $user_id = intval($_GET['id']);
